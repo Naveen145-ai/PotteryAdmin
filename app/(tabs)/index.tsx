@@ -9,18 +9,16 @@ export default function AdminPage() {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
 
-  // Fetch all pots
   const fetchPots = async () => {
-    try {
-      const res = await fetch("http://192.168.160.242:5000/api/v1/getAllPots");
-      const data = await res.json();
-      if (data.success) {
-        setPots(data.pots);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  try {
+    const res = await fetch("http://192.168.160.242:5000/api/v1/getAllPots");
+    const data = await res.json();
+    setPots(data.pots || []); // No success check, just set
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 
   // Add pot
   const addPot = async () => {
